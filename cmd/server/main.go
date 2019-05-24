@@ -11,7 +11,7 @@ import (
 
 var (
 	tcpAddr   = flag.String("tcpAddr", ":4344", "")
-	udpAddr   = flag.String("udpAddr", ":12345", "")
+	udpAddr   = flag.String("udpAddr", ":12346", "")
 	bufSize   = flag.Int("bufSize", 4096, "")
 	conn2addr sync.Map
 	addr2conn sync.Map
@@ -37,6 +37,7 @@ func listenTCP(t tunnel.Tunnel, udp net.PacketConn) {
 }
 
 func listenUDP(t tunnel.Tunnel, udp net.PacketConn) {
+	log.Println("listen udp", udp.LocalAddr())
 	buf := make([]byte, *bufSize)
 	for {
 		n, addr, err := udp.ReadFrom(buf)

@@ -25,7 +25,7 @@ func listenTCP(t tunnel.Tunnel, remote *net.UDPAddr) {
 			c = v.(net.PacketConn)
 		} else {
 			var err error
-			c, err = net.DialUDP("udp", nil, remote)
+			c, err = net.ListenPacket("udp", ":0")
 			if err != nil {
 				log.Println("create conn", conn, "error:", err)
 				continue
